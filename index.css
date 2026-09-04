@@ -1123,9 +1123,10 @@ section {
 
 .references-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-bottom: 60px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 960px;
+    margin: 0 auto 60px auto;
 }
 
 .reference-card {
@@ -1167,10 +1168,10 @@ section {
 }
 
 .ref-title {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 6px;
+    margin-bottom: 0;
 }
 
 .ref-meta {
@@ -1841,7 +1842,15 @@ section {
         height: 16px;
     }
     
-    /* Hero button smaller */
+    /* Hero mobile spacing & sizing */
+    .hero-container {
+        padding-top: calc(var(--header-height) + 36px);
+        padding-bottom: 40px;
+    }
+    .hero-tag {
+        margin-top: 24px;
+        margin-bottom: 20px;
+    }
     .hero-section .btn-large {
         padding: 12px 20px;
         font-size: 14px;
