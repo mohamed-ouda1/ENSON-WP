@@ -1544,12 +1544,18 @@ input[type="range"] {
   box-shadow: 0 6px 20px rgba(223, 169, 75, 0.55);
 }
 
+.direct-phones-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .direct-phone-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   color: var(--text-white);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   text-decoration: none;
   transition: color 0.2s ease;
@@ -1558,6 +1564,7 @@ input[type="range"] {
 
 .direct-phone-link svg {
   color: var(--gold-accent);
+  flex-shrink: 0;
 }
 
 .direct-phone-link:hover {
@@ -1590,6 +1597,47 @@ input[type="range"] {
   padding-bottom: 26px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   width: 100%;
+}
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.social-icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.social-icon-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.social-icon-btn:hover {
+  background: rgba(16, 232, 138, 0.15);
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+  box-shadow: 0 0 16px rgba(16, 232, 138, 0.45);
+  transform: translateY(-3px);
+}
+
+.footer-phone-links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .footer-contact-item {
@@ -2106,25 +2154,119 @@ input[type="range"] {
     font-size: 14px;
   }
 
-  /* Footer Mobile */
+  /* Footer Mobile Redesign */
+  .footer-section {
+    padding: 36px 0 18px 0;
+  }
+
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    text-align: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: stretch;
+    padding-bottom: 20px;
+  }
+
+  .brand-col {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .footer-logo {
+    justify-content: flex-start;
+  }
+
+  .footer-social-links {
+    margin-top: 0;
+    justify-content: flex-end;
+  }
+
+  .address-col {
+    grid-column: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contact-col {
+    grid-column: 2;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
   }
 
   .footer-contact-item {
-    justify-content: center;
+    font-size: 11.5px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    gap: 8px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .footer-contact-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .footer-contact-item svg {
+    width: 15px;
+    height: 15px;
+    margin-top: 2px;
+  }
+
+  .footer-phone-links {
+    align-items: flex-start;
+    gap: 3px;
+  }
+
+  .footer-phone-links a,
+  .footer-contact-item a {
+    font-size: 11px;
+    word-break: break-all;
+  }
+
+  .signature-col {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 6px;
   }
 
   .footer-handwritten-slogan {
     text-align: center;
-    font-size: 26px;
-    transform: rotate(0);
+    font-size: 28px;
+    transform: rotate(-1deg);
+  }
+
+  .legal-col {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    padding-top: 4px;
+  }
+
+  .legal-links {
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .legal-links a {
+    font-size: 12px;
+    color: #94a3b8;
   }
 
   /* Modal Mobile */
@@ -2178,5 +2320,18 @@ input[type="range"] {
 
   .contact-headline {
     font-size: 22px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .address-col, .contact-col {
+    grid-column: 1 / -1;
+  }
+
+  .footer-social-links {
+    justify-content: flex-start;
   }
 }
