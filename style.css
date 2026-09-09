@@ -1248,59 +1248,82 @@ input[type="range"] {
 }
 
 /* ==========================================================================
-   BRAND TRUST STRIP (PARTNER LOGOS)
+   BRAND TRUST STRIP (GLOWING INFINITE CONTINUOUS MARQUEE)
    ========================================================================== */
 .trust-strip {
   position: relative;
-  background: linear-gradient(180deg, rgba(20, 28, 38, 0.95) 0%, rgba(15, 22, 30, 0.95) 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 24px 0;
+  background: linear-gradient(180deg, rgba(16, 23, 33, 0.95) 0%, rgba(10, 15, 22, 0.98) 100%);
+  border-top: 1px solid rgba(229, 184, 105, 0.2);
+  border-bottom: 1px solid rgba(16, 232, 138, 0.2);
+  box-shadow: inset 0 0 30px rgba(16, 232, 138, 0.08), 0 10px 30px rgba(0, 0, 0, 0.6);
+  padding: 28px 0;
   z-index: 10;
   width: 100%;
+  overflow: hidden;
 }
 
-.trust-logos-row {
+.trust-marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.trust-marquee-track {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
-  width: 100%;
+  gap: 70px;
+  width: max-content;
+  animation: scrollLogos 24s linear infinite;
+  will-change: transform;
+}
+
+.trust-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollLogos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .partner-logo-item {
-  opacity: 0.65;
-  transition: all 0.3s ease;
-  filter: grayscale(100%);
-  color: #cbd5e1;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #f8fafc;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 18px rgba(16, 232, 138, 0.45)) drop-shadow(0 0 28px rgba(229, 184, 105, 0.25));
+  transition: all 0.3s ease;
+  flex-shrink: 0;
 }
 
 .partner-logo-item:hover {
-  opacity: 1;
-  filter: grayscale(0%);
-  color: #ffffff;
+  filter: drop-shadow(0 0 12px #ffffff) drop-shadow(0 0 24px var(--neon-green)) drop-shadow(0 0 36px var(--gold-accent));
+  transform: scale(1.08);
 }
 
 .partner-svg {
-  height: 30px;
+  height: 36px;
   width: auto;
-  max-width: 140px;
+  max-width: 165px;
 }
 
 .stiebel-box {
-  border: 1.5px solid currentColor;
-  padding: 4px 10px;
-  border-radius: 2px;
+  border: 2px solid currentColor;
+  padding: 5px 14px;
+  border-radius: 4px;
+  box-shadow: 0 0 14px rgba(16, 232, 138, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .stiebel-text {
   font-weight: 900;
-  font-size: 14px;
-  letter-spacing: 1.5px;
+  font-size: 16px;
+  letter-spacing: 2px;
 }
 
 /* ==========================================================================
@@ -2030,23 +2053,17 @@ input[type="range"] {
 
   /* Trust Strip Mobile */
   .trust-strip {
-    padding: 18px 0;
+    padding: 20px 0;
   }
 
-  .trust-logos-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px 12px;
-    justify-items: center;
-  }
-
-  .partner-logo-item:last-child {
-    grid-column: span 2;
+  .trust-marquee-track {
+    gap: 45px;
+    animation: scrollLogos 20s linear infinite;
   }
 
   .partner-svg {
-    height: 24px;
-    max-width: 110px;
+    height: 28px;
+    max-width: 125px;
   }
 
   /* Contact Section Mobile */
