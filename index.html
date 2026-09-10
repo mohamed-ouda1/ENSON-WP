@@ -42,8 +42,8 @@
       </div>
 
       <div class="nav-actions">
-        <a href="#contact" class="btn-quote">
-          <span>Request Quote</span>
+        <a href="#calculator" class="btn-quote">
+          <span>Angebot anfordern</span>
           <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
@@ -343,89 +343,392 @@
     </div>
   </section>
 
-  <!-- INTERACTIVE SUBSIDY CALCULATOR (FÖRDERUNGSRECHNER) -->
+  <!-- INTERACTIVE SUBSIDY CALCULATOR & MULTI-STEP INQUIRY (FÖRDERUNGSRECHNER 2026) -->
   <section class="calculator-section" id="calculator">
     <div class="container">
       <div class="calc-card glass-card">
+        
+        <!-- Header -->
         <div class="calc-header">
-          <span class="section-eyebrow-gold">FÖRDERUNGSRECHNER 2026</span>
-          <h2 class="calc-title">Ermitteln Sie Ihre maximale staatliche Ersparnis</h2>
-          <p class="calc-desc">Mit der neuen BEG-Förderung (KfW 458) erhalten Eigenheimbesitzer bis zu 70% Zuschuss beim Heizungstausch.</p>
+          <span class="section-eyebrow-gold">Wärmepumpen-Rechner</span>
+          <h2 class="calc-title">Bis zu 70% Förderung für Ihre Wärmepumpe</h2>
+          <p class="calc-desc">Durch attraktive staatliche Förderprogramme können Sie die Investitionskosten Ihrer neuen Wärmepumpe deutlich reduzieren – je nach Voraussetzungen sogar um bis zu 70%.</p>
         </div>
 
-        <div class="calc-interactive-grid">
+        <!-- Wizard Progress Bar -->
+        <div class="calc-wizard-progress">
+          <div class="wizard-progress-header">
+            <span class="wizard-step-counter">Schritt <strong id="currentStepNum">1</strong> von 4</span>
+            <span class="wizard-step-hint" id="stepTitleHint">Gebäudetyp auswählen</span>
+          </div>
+          <div class="wizard-progress-track">
+            <div class="wizard-progress-fill" id="wizardProgressFill" style="width: 25%;"></div>
+          </div>
+          <div class="wizard-steps-indicators">
+            <div class="step-dot-item active" data-step-target="1">
+              <span class="step-dot-num">1</span>
+              <span class="step-dot-label">Gebäude</span>
+            </div>
+            <div class="step-dot-item" data-step-target="2">
+              <span class="step-dot-num">2</span>
+              <span class="step-dot-label">Heizung</span>
+            </div>
+            <div class="step-dot-item" data-step-target="3">
+              <span class="step-dot-num">3</span>
+              <span class="step-dot-label">Fläche</span>
+            </div>
+            <div class="step-dot-item" data-step-target="4">
+              <span class="step-dot-num">4</span>
+              <span class="step-dot-label">Kontakt</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="calc-interactive-grid" id="subsidyInquiryForm" novalidate>
           <div class="calc-inputs">
             
-            <div class="calc-group">
-              <label class="calc-label">Aktuelle Heizungsart:</label>
-              <div class="calc-options" id="calcOldHeating">
-                <button type="button" class="calc-btn active" data-bonus="20">Gasheizung (> 20 J.)</button>
-                <button type="button" class="calc-btn" data-bonus="20">Ölheizung</button>
-                <button type="button" class="calc-btn" data-bonus="20">Alte Nachtspeicher</button>
-                <button type="button" class="calc-btn" data-bonus="0">Neubau / Effizient</button>
+            <!-- STEP 1: Gebäudeart -->
+            <div class="calc-step active" data-step="1">
+              <div class="calc-step-header">
+                <span class="step-tag">Schritt 1</span>
+                <h3 class="calc-step-title">Für welches Gebäude suchen Sie eine Wärmepumpe?</h3>
+                <p class="calc-step-desc">Wählen Sie den passenden Immobilientyp aus:</p>
+              </div>
+
+              <div class="calc-options-grid" id="calcBuildingType">
+                <button type="button" class="calc-choice-card active" data-val="Einfamilienhaus">
+                  <div class="choice-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                  </div>
+                  <div class="choice-info">
+                    <span class="choice-title">Einfamilienhaus</span>
+                    <span class="choice-sub">Freistehend oder DHH / RH</span>
+                  </div>
+                  <div class="choice-radio"></div>
+                </button>
+
+                <button type="button" class="calc-choice-card" data-val="Zweifamilienhaus">
+                  <div class="choice-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <path d="M9 22V12h6v10"></path>
+                      <path d="M9 12h6"></path>
+                    </svg>
+                  </div>
+                  <div class="choice-info">
+                    <span class="choice-title">Zweifamilienhaus</span>
+                    <span class="choice-sub">2 Wohneinheiten</span>
+                  </div>
+                  <div class="choice-radio"></div>
+                </button>
+
+                <button type="button" class="calc-choice-card" data-val="Mehrfamilienhaus">
+                  <div class="choice-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                      <line x1="9" y1="6" x2="9" y2="6.01"></line>
+                      <line x1="15" y1="6" x2="15" y2="6.01"></line>
+                      <line x1="9" y1="10" x2="9" y2="10.01"></line>
+                      <line x1="15" y1="10" x2="15" y2="10.01"></line>
+                      <line x1="9" y1="14" x2="9" y2="14.01"></line>
+                      <line x1="15" y1="14" x2="15" y2="14.01"></line>
+                      <line x1="9" y1="18" x2="15" y2="18"></line>
+                    </svg>
+                  </div>
+                  <div class="choice-info">
+                    <span class="choice-title">Mehrfamilienhaus</span>
+                    <span class="choice-sub">Ab 3 Wohneinheiten</span>
+                  </div>
+                  <div class="choice-radio"></div>
+                </button>
+
+                <button type="button" class="calc-choice-card" data-val="Gewerbeimmobilie">
+                  <div class="choice-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"></path>
+                      <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"></path>
+                      <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"></path>
+                      <path d="M10 6h4"></path>
+                      <path d="M10 10h4"></path>
+                      <path d="M10 14h4"></path>
+                      <path d="M10 18h4"></path>
+                    </svg>
+                  </div>
+                  <div class="choice-info">
+                    <span class="choice-title">Gewerbeimmobilie</span>
+                    <span class="choice-sub">Büro, Halle, Betrieb</span>
+                  </div>
+                  <div class="choice-radio"></div>
+                </button>
+              </div>
+
+              <div class="wizard-nav-buttons single-next">
+                <button type="button" class="wizard-btn-next" data-next-step="2">
+                  <span>Weiter zu Schritt 2</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
               </div>
             </div>
 
-            <div class="calc-group">
-              <label class="calc-label">Geschätzte Investitionssumme (€):</label>
-              <div class="range-wrap">
-                <input type="range" id="investRange" min="15000" max="45000" step="1000" value="30000">
+            <!-- STEP 2: Aktuelle Heizung -->
+            <div class="calc-step" data-step="2">
+              <div class="calc-step-header">
+                <span class="step-tag">Schritt 2</span>
+                <h3 class="calc-step-title">Womit heizen Sie aktuell?</h3>
+                <p class="calc-step-desc">Wählen Sie Ihr bestehendes Heizsystem:</p>
+              </div>
+
+              <div class="calc-options-grid" id="calcCurrentHeating">
+                <button type="button" class="calc-choice-card active" data-val="Gasheizung">
+                  <div class="choice-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+                    </svg>
+                  </div>
+                  <div class="choice-info">
+                    <span class="choice-title">Gasheizung</span>
+                    <span class="choice-sub">Erdgas / Flüssiggas</span>
+                  </div>
+                  <div class="choice-radio"></div>
+                </button>
+
+                <button type="button" class="calc-choice-card" data-val="Ölheizung">
+                  <div class="choice-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                  </div>
+                  <div class="choice-info">
+                    <span class="choice-title">Ölheizung</span>
+                    <span class="choice-sub">Heizölkessel</span>
+                  </div>
+                  <div class="choice-radio"></div>
+                </button>
+
+                <button type="button" class="calc-choice-card" data-val="Strom / Nachtspeicher">
+                  <div class="choice-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                  </div>
+                  <div class="choice-info">
+                    <span class="choice-title">Strom / Nachtspeicher</span>
+                    <span class="choice-sub">Elektroheizung</span>
+                  </div>
+                  <div class="choice-radio"></div>
+                </button>
+
+                <button type="button" class="calc-choice-card" data-val="Pellet / Sonstige">
+                  <div class="choice-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2v8"></path>
+                      <path d="m4.93 10.93 1.41 1.41"></path>
+                      <path d="M2 18h2"></path>
+                      <path d="M20 18h2"></path>
+                      <path d="m19.07 10.93-1.41 1.41"></path>
+                      <path d="M22 22H2"></path>
+                      <path d="m8 22 4-10 4 10"></path>
+                    </svg>
+                  </div>
+                  <div class="choice-info">
+                    <span class="choice-title">Pellet / Sonstige</span>
+                    <span class="choice-sub">Holz, Kohle oder Fernwärme</span>
+                  </div>
+                  <div class="choice-radio"></div>
+                </button>
+              </div>
+
+              <div class="wizard-nav-buttons">
+                <button type="button" class="wizard-btn-prev" data-prev-step="1">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                  </svg>
+                  <span>Zurück</span>
+                </button>
+                <button type="button" class="wizard-btn-next" data-next-step="3">
+                  <span>Weiter zu Schritt 3</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 3: Wohnfläche & Wärmeverteilung -->
+            <div class="calc-step" data-step="3">
+              <div class="calc-step-header">
+                <span class="step-tag">Schritt 3</span>
+                <h3 class="calc-step-title">Wie groß ist Ihre zu beheizende Wohnfläche?</h3>
+                <p class="calc-step-desc">Geben Sie die Fläche an und wählen Sie das Wärmeverteilungssystem:</p>
+              </div>
+
+              <!-- Slider Container -->
+              <div class="range-wrap wizard-range-wrap">
+                <div class="range-header-info">
+                  <span class="range-sub-label">Wohnfläche (ca.):</span>
+                  <strong class="range-val-badge" id="areaDisplay">140 m²</strong>
+                </div>
+                <input type="range" id="areaRange" min="50" max="400" step="10" value="140">
                 <div class="range-display">
-                  <span>15.000 €</span>
-                  <strong id="investDisplay">30.000 €</strong>
-                  <span>45.000 €</span>
+                  <span>50 m²</span>
+                  <span>200 m²</span>
+                  <span>400 m²</span>
                 </div>
               </div>
+
+              <!-- Distribution Options -->
+              <div class="calc-sub-group">
+                <label class="calc-label-sub">Wärmeverteilung im Gebäude:</label>
+                <div class="calc-options-grid two-col" id="calcHeatDistribution">
+                  <button type="button" class="calc-choice-card active" data-val="Klassische Heizkörper">
+                    <div class="choice-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+                        <line x1="7" y1="4" x2="7" y2="20"></line>
+                        <line x1="12" y1="4" x2="12" y2="20"></line>
+                        <line x1="17" y1="4" x2="17" y2="20"></line>
+                      </svg>
+                    </div>
+                    <div class="choice-info">
+                      <span class="choice-title">Klassische Heizkörper</span>
+                      <span class="choice-sub">Standard Radiatoren</span>
+                    </div>
+                    <div class="choice-radio"></div>
+                  </button>
+
+                  <button type="button" class="calc-choice-card" data-val="Fußbodenheizung">
+                    <div class="choice-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 12h4c1.1 0 2 .9 2 2v2c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2v-2c0-1.1.9-2 2-2h4"></path>
+                        <path d="M2 6h4c1.1 0 2 .9 2 2v2c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V8c0-1.1.9-2 2-2h4"></path>
+                      </svg>
+                    </div>
+                    <div class="choice-info">
+                      <span class="choice-title">Fußbodenheizung</span>
+                      <span class="choice-sub">Flächenheizung</span>
+                    </div>
+                    <div class="choice-radio"></div>
+                  </button>
+                </div>
+              </div>
+
+              <div class="wizard-nav-buttons">
+                <button type="button" class="wizard-btn-prev" data-prev-step="2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                  </svg>
+                  <span>Zurück</span>
+                </button>
+                <button type="button" class="wizard-btn-next" data-next-step="4">
+                  <span>Weiter zum letzten Schritt</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+              </div>
             </div>
 
-            <div class="calc-checkbox-group">
-              <label class="calc-check">
-                <input type="checkbox" id="selfUsed" checked>
-                <span class="checkmark"></span>
-                <span>Selbstgenutztes Wohneigentum (Geschwindigkeitsbonus +20%)</span>
-              </label>
-              <label class="calc-check">
-                <input type="checkbox" id="lowIncome">
-                <span class="checkmark"></span>
-                <span>Haushaltseinkommen ≤ 40.000 € (Einkommensbonus +30%)</span>
-              </label>
+            <!-- STEP 4: Kontaktdaten -->
+            <div class="calc-step" data-step="4">
+              <div class="calc-step-header">
+                <span class="step-tag success">Letzter Schritt</span>
+                <h3 class="calc-step-title">Wohin dürfen wir Ihre kostenlose Auswertung senden?</h3>
+                <p class="calc-step-desc">Ein ENSON Energieberater prüft Ihre Angaben und meldet sich innerhalb von 24h:</p>
+              </div>
+
+              <div class="calc-fields-grid">
+                <div class="calc-field">
+                  <label class="field-label">Vor- und Nachname *</label>
+                  <input type="text" id="calcUserName" class="calc-input" placeholder="z. B. Max Mustermann" required>
+                </div>
+                <div class="calc-field">
+                  <label class="field-label">Telefonnummer (für Rückfragen) *</label>
+                  <input type="tel" id="calcUserPhone" class="calc-input" placeholder="z. B. +49 176 12345678" required>
+                </div>
+                <div class="calc-field full-width">
+                  <label class="field-label">E-Mail-Adresse *</label>
+                  <input type="email" id="calcUserEmail" class="calc-input" placeholder="z. B. name@beispiel.de" required>
+                </div>
+                <div class="calc-field full-width">
+                  <label class="field-label">Ihre Nachricht / Besonderheiten (optional)</label>
+                  <textarea id="calcUserMsg" class="calc-textarea" rows="2" placeholder="z. B. Gewünschter Installationstermin, Baujahr des Hauses..."></textarea>
+                </div>
+              </div>
+
+              <div class="wizard-nav-buttons">
+                <button type="button" class="wizard-btn-prev" data-prev-step="3">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                  </svg>
+                  <span>Zurück</span>
+                </button>
+                <button type="submit" class="btn-calc-cta" id="calcSubmitBtn">
+                  <span>Kostenlose Berechnung anfordern</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                </button>
+              </div>
             </div>
 
           </div>
 
+          <!-- SUMMARY PREVIEW SIDEBAR -->
           <div class="calc-results glass-card">
             <div class="result-rate">
-              <span class="rate-label">Ihr Gesamtfördersatz</span>
-              <span class="rate-number" id="subsidyPercent">50%</span>
+              <div class="rate-left-col">
+                <span class="rate-label">Möglicher Zuschuss:</span>
+              </div>
+              <span class="rate-number">Bis zu 70%</span>
             </div>
 
-            <div class="result-breakdown">
-              <div class="break-item">
-                <span>Grundförderung:</span>
-                <strong>30%</strong>
+            <div class="result-summary-box">
+              <div class="summary-box-title">Ihre gewählte Konfiguration:</div>
+              <div class="summary-item">
+                <span>Gebäude:</span>
+                <strong id="sumBuilding">Einfamilienhaus</strong>
               </div>
-              <div class="break-item">
-                <span>Geschwindigkeitsbonus:</span>
-                <strong id="speedBonusVal">+20%</strong>
+              <div class="summary-item">
+                <span>Heizung:</span>
+                <strong id="sumHeating">Gasheizung</strong>
               </div>
-              <div class="break-item">
-                <span>Einkommensbonus:</span>
-                <strong id="incomeBonusVal">+0%</strong>
+              <div class="summary-item">
+                <span>Wohnfläche:</span>
+                <strong id="sumArea">140 m²</strong>
               </div>
-              <div class="break-divider"></div>
-              <div class="break-total">
-                <span>Geschätzter Förderzuschuss:</span>
-                <strong class="total-amount" id="subsidyAmount">15.000 €</strong>
-              </div>
-              <div class="break-net">
-                <span>Ihr effektiver Eigenanteil:</span>
-                <span class="net-amount" id="netAmount">15.000 €</span>
+              <div class="summary-item">
+                <span>Verteilung:</span>
+                <strong id="sumDistribution">Klassische Heizkörper</strong>
               </div>
             </div>
 
-            <a href="#contact" class="btn-calc-cta">Angebot mit Förderung anfragen →</a>
+            <div class="calc-trust-bullets">
+              <div class="trust-bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>Unverbindliche Prüfung & Förderungs-Optimierung</span>
+              </div>
+              <div class="trust-bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>Rückmeldung durch ENSON Berater innerhalb 24h</span>
+              </div>
+              <div class="trust-bullet-item">
+                <span class="bullet-check">✓</span>
+                <span>100% kostenloser Service ohne Verpflichtung</span>
+              </div>
+            </div>
           </div>
-        </div>
+        </form>
 
       </div>
     </div>
