@@ -2076,15 +2076,153 @@ input[type="range"] {
     font-size: 22px;
   }
 
-  /* Benefit Cards Mobile */
+  /* Benefit Cards Mobile - Compact Connected Energy Flow Design */
   .benefit-cards-grid {
-    grid-template-columns: 1fr;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     gap: 12px;
+    padding: 6px 0;
+  }
+
+  /* Flowing Glowing Green Connector Line from first to last card */
+  .benefit-cards-grid::before {
+    content: '';
+    position: absolute;
+    top: 26px;
+    bottom: 26px;
+    left: 31px;
+    width: 2.5px;
+    background: linear-gradient(180deg, 
+      rgba(92, 255, 138, 0.2) 0%, 
+      rgba(92, 255, 138, 0.95) 30%, 
+      rgba(92, 255, 138, 1) 60%, 
+      rgba(92, 255, 138, 0.2) 100%
+    );
+    background-size: 100% 250%;
+    animation: energyLineFlow 2.8s linear infinite;
+    box-shadow: 0 0 8px rgba(92, 255, 138, 0.6), 0 0 16px rgba(92, 255, 138, 0.3);
+    z-index: 1;
+    border-radius: 3px;
+  }
+
+  @keyframes energyLineFlow {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 0% 250%;
+    }
   }
 
   .benefit-card {
+    position: relative;
+    z-index: 2;
     min-height: auto;
-    padding: 18px 16px;
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+    column-gap: 12px;
+    row-gap: 3px;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(38, 44, 50, 0.9) 0%, rgba(24, 28, 32, 0.95) 100%);
+    border: 1px solid rgba(180, 187, 195, 0.16);
+    border-radius: var(--radius-md);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .benefit-card .card-icon-wrap {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    margin-bottom: 0;
+    align-self: center;
+  }
+
+  .benefit-card .neon-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: #1e2429;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    position: relative;
+    z-index: 3;
+  }
+
+  .benefit-card .neon-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .benefit-card .card-title {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 1px;
+    line-height: 1.25;
+    color: var(--text-heading);
+  }
+
+  .benefit-card .card-desc {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .benefit-card .card-visual-element {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: 0;
+  }
+
+  .benefit-card .subsidy-element {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .benefit-card .percent-badge-gold {
+    font-size: 16px;
+  }
+
+  .benefit-card .mini-bar-chart {
+    height: 14px;
+    gap: 3px;
+  }
+
+  .benefit-card .mini-bar-chart .bar {
+    width: 3.5px;
+  }
+
+  .benefit-card .efficiency-badge-green {
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .benefit-card .wave-container {
+    height: 10px;
+  }
+
+  .benefit-card .progress-bar-slider {
+    margin: 3px 0 0 0;
+    height: 4px;
+  }
+
+  .benefit-card .slider-thumb-ring {
+    width: 12px;
+    height: 12px;
+    top: -4px;
+  }
+
+  .benefit-card .slider-labels {
+    font-size: 9px;
+    margin-top: 3px;
   }
 
   /* Solutions 3D Cutaway Badge on Mobile */
