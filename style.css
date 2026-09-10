@@ -379,7 +379,7 @@ body {
   width: 100%;
   background-image:
     linear-gradient(to right, rgba(32, 37, 41, 0.96) 0%, rgba(32, 37, 41, 0.88) 40%, rgba(32, 37, 41, 0.4) 75%, rgba(32, 37, 41, 0.85) 100%),
-    url('assets/images/hero-bg.png');
+    url('assets/images/hero-bg.webp');
   background-position: center right;
   background-repeat: no-repeat;
   background-size: cover;
