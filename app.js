@@ -34,8 +34,19 @@ function initEnergyCanvas() {
       canvas.height = canvas.parentElement.clientHeight;
     }
   }
+  let isResizeTicking = false;
+  function onWindowResize() {
+    if (!isResizeTicking) {
+      window.requestAnimationFrame(() => {
+        resizeCanvas();
+        isResizeTicking = false;
+      });
+      isResizeTicking = true;
+    }
+  }
+
   resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('resize', onWindowResize, { passive: true });
 
   const particles = [];
   const particleCount = 28;
@@ -314,6 +325,12 @@ function initSubsidyCalculator() {
         return;
       }
 
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        alert('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+        return;
+      }
+
       if (toast) {
         toast.classList.add('active');
 
@@ -408,15 +425,18 @@ function initNavigation() {
     });
   }
 
-  // Active Link Highlight on Scroll
-  window.addEventListener('scroll', () => {
+  // Active Link Highlight on Scroll (throttled via requestAnimationFrame)
+  let isScrollTicking = false;
+
+  function updateActiveNavOnScroll() {
     let current = '';
+    const scrollPos = window.scrollY || window.pageYOffset || 0;
     const sections = document.querySelectorAll('section[id]');
-    
+
     sections.forEach(sec => {
       const secTop = sec.offsetTop - 140;
       const secHeight = sec.clientHeight;
-      if (pageYOffset >= secTop && pageYOffset < secTop + secHeight) {
+      if (scrollPos >= secTop && scrollPos < secTop + secHeight) {
         current = sec.getAttribute('id');
       }
     });
@@ -427,7 +447,16 @@ function initNavigation() {
         link.classList.add('active');
       }
     });
-  });
+
+    isScrollTicking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!isScrollTicking) {
+      window.requestAnimationFrame(updateActiveNavOnScroll);
+      isScrollTicking = true;
+    }
+  }, { passive: true });
 }
 
 /* ==========================================================================
@@ -447,6 +476,12 @@ function initLeadForm() {
 
       if (!name || !phone || !email) {
         alert('Bitte füllen Sie alle erforderlichen Felder aus.');
+        return;
+      }
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        alert('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
         return;
       }
 
