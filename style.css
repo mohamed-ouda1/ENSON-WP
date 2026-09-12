@@ -2755,19 +2755,22 @@ body {
   }
 
   .hero-benefit-pills {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 6px;
-    width: 100%;
+    width: fit-content;
+    max-width: 75%;
   }
 
   .benefit-pill {
-    width: 100%;
-    padding: 6px 4px;
-    flex-direction: column;
+    width: auto;
+    display: inline-flex;
+    flex-direction: row;
     align-items: center;
-    text-align: center;
-    gap: 4px;
+    text-align: left;
+    gap: 8px;
+    padding: 5px 12px;
     box-sizing: border-box;
     border-radius: var(--radius-sm);
   }
@@ -2776,6 +2779,7 @@ body {
     width: 24px;
     height: 24px;
     border-radius: 6px;
+    flex-shrink: 0;
   }
 
   .benefit-pill .pill-icon svg {
@@ -2784,13 +2788,14 @@ body {
   }
 
   .benefit-pill .pill-title {
-    font-size: 11px;
-    line-height: 1.1;
+    font-size: 11.5px;
+    font-weight: 700;
+    line-height: 1.15;
   }
 
   .benefit-pill .pill-sub {
-    font-size: 9.5px;
-    line-height: 1.1;
+    font-size: 10px;
+    line-height: 1.15;
   }
 
   .hero-handwritten-tag {
