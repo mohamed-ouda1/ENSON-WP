@@ -52,25 +52,29 @@ function initEnergyCanvas() {
   const particleCount = 28;
 
   const paths = [
+    // Branch 1: Left branch towards the house terrace & seating area (hugging the house)
     [
-      { x: 0.68, y: 0.76 },
-      { x: 0.60, y: 0.77 },
-      { x: 0.50, y: 0.76 },
-      { x: 0.35, y: 0.75 },
-      { x: 0.20, y: 0.74 },
-      { x: 0.05, y: 0.74 }
+      { x: 0.64, y: 0.76 },
+      { x: 0.55, y: 0.77 },
+      { x: 0.44, y: 0.75 },
+      { x: 0.34, y: 0.72 },
+      { x: 0.25, y: 0.68 },
+      { x: 0.19, y: 0.65 }
     ],
+    // Branch 2: Right branch towards the front walkway / entrance
     [
-      { x: 0.68, y: 0.76 },
+      { x: 0.66, y: 0.76 },
       { x: 0.75, y: 0.78 },
-      { x: 0.85, y: 0.75 },
-      { x: 0.92, y: 0.65 }
+      { x: 0.82, y: 0.74 },
+      { x: 0.88, y: 0.68 }
     ],
+    // Branch 3: Rising into the Upper Floor (الدور العلوي)
     [
-      { x: 0.68, y: 0.76 },
-      { x: 0.65, y: 0.60 },
-      { x: 0.55, y: 0.50 },
-      { x: 0.45, y: 0.50 }
+      { x: 0.63, y: 0.75 },
+      { x: 0.59, y: 0.65 },
+      { x: 0.58, y: 0.52 },
+      { x: 0.55, y: 0.38 },
+      { x: 0.46, y: 0.32 }
     ]
   ];
 

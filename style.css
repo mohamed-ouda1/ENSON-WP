@@ -870,8 +870,8 @@ body {
 .percent-badge-gold {
   font-size: 22px;
   font-weight: 800;
-  color: var(--gold-accent);
-  text-shadow: 0 0 14px var(--gold-glow);
+  color: var(--neon-green);
+  text-shadow: 0 0 14px var(--neon-green-glow);
   line-height: 1;
 }
 
@@ -884,8 +884,9 @@ body {
 
 .mini-bar-chart .bar {
   width: 5px;
-  background: rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, var(--neon-green), var(--green-dark));
   border-radius: 3px;
+  box-shadow: 0 0 8px var(--neon-green-glow);
   transition: all 0.3s ease;
 }
 
@@ -901,10 +902,15 @@ body {
   height: 75%;
 }
 
+.mini-bar-chart .bar.b4,
 .mini-bar-chart .bar.b4.active {
   height: 100%;
-  background: linear-gradient(180deg, var(--gold-accent), var(--gold-dark));
-  box-shadow: 0 0 12px var(--gold-glow);
+  background: linear-gradient(180deg, #7aff9e, var(--neon-green));
+  box-shadow: 0 0 12px var(--neon-green-glow);
+}
+
+.benefit-card:hover .mini-bar-chart .bar {
+  box-shadow: 0 0 12px var(--neon-green);
 }
 
 .efficiency-badge-green {
@@ -967,9 +973,9 @@ body {
 }
 
 .slider-fill {
-  width: 85%;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, var(--gold-primary), var(--neon-green));
+  background: linear-gradient(90deg, var(--gold-primary) 0%, var(--green-dark) 40%, var(--neon-green) 100%);
   border-radius: 4px;
   box-shadow: 0 0 10px var(--neon-green-glow);
 }
@@ -982,7 +988,8 @@ body {
   background: #1A1E22;
   position: absolute;
   top: -5px;
-  left: 82%;
+  right: -2px;
+  left: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2625,8 +2632,13 @@ body {
     border-radius: var(--radius-lg);
   }
 
-  .brand-name {
-    font-size: 19px;
+  .navbar .brand-name {
+    font-size: 23px;
+    letter-spacing: 1.8px;
+  }
+
+  .navbar .brand-o::after {
+    display: none;
   }
 
   .brand-sub {
@@ -2896,6 +2908,8 @@ body {
     width: 12px;
     height: 12px;
     top: -4px;
+    right: -2px;
+    left: auto;
   }
 
   .benefit-card .slider-labels {
@@ -3230,8 +3244,8 @@ body {
 
 /* Very Small Screen Phones (max-width: 380px) */
 @media (max-width: 380px) {
-  .brand-name {
-    font-size: 17px;
+  .navbar .brand-name {
+    font-size: 20px;
   }
 
   .hero-headline {
